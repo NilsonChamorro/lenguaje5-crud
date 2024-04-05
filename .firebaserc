@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "tplpv-9c012": {
+      "hosting": {
+        "app": [
+          "tplpv-9c012"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "tplpv-9c012"
+  }
+}
