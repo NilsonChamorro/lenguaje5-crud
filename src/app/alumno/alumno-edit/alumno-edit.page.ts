@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AlumnoEditPage implements OnInit {
   alumno: any = [];
   id: any;
-  constructor(private readonly firestore: Firestore,  private route: ActivatedRoute, private rt: Router) { }
+  constructor(private readonly firestore: Firestore, private route: ActivatedRoute, private rt: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe((params: any) => {
@@ -78,5 +78,7 @@ export class AlumnoEditPage implements OnInit {
     }
     this.volver();
   }
+
+  
 
 }
