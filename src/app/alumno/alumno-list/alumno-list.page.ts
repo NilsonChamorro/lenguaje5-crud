@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { collection, collectionData, deleteDoc, doc, Firestore } from '@angular/fire/firestore';
+import { collection, collectionData, deleteDoc, doc, Firestore, limit } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { query } from 'express';
 
 @Component({
   selector: 'app-alumno-list',
@@ -29,15 +30,10 @@ export class AlumnoListPage implements OnInit {
     console.log("listar alumnos");
     const alumnosRef = collection(this.firestore, 'alumno');
 
-    let q = query(alumnosRef, limit(this.maxResults));
-    getDocs(q).then(re => {
-      re.forEach(doc => {
-        let alumno: any = doc.data();
-        alumno.id = doc.id;
-        this.listaAlumnos.push(alumno);
-        console.log("listar");
-      });
-    });
+    collectionData(alumnosRef, { idField: 'id' }).subscribe(respuesta => {
+      console.log("estosson los alumnos", respuesta);
+      this.listaAlumnos = respuesta;
+    })
   }
 
   nuevo = () => {
@@ -55,13 +51,6 @@ export class AlumnoListPage implements OnInit {
     }).catch((error) => {
       console.error("Error al eliminar el documento: ", error);
     });
-  }
-
-  onIonInfinite(ev: any){
-    this.listarAlumnos();
-    setTimeout(() => {
-      (ev. as InfiniteSc)
-    })
   }
 
 }
